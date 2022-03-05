@@ -1,0 +1,239 @@
+:root {
+  --height-of-day-progress: 60px;
+  --width-of-day-progress: 370px;
+  --progress: 0;
+  --width-and-height-of-clock: 350px;
+  --width-of-screen: 0;
+  --height-of-screen: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(0, 3, 155);
+  border-radius: 100px;
+}
+
+#recentNotes::-webkit-scrollbar-track {
+  border-radius: 0 100px 100px 0;
+}
+
+#recentNotes::-webkit-scrollbar-thumb {
+  border-radius: 0 100px 100px 0;
+}
+
+#notePreview::-webkit-scrollbar-track {
+  border-radius: 0 100px 100px 0;
+}
+
+#notePreview::-webkit-scrollbar-thumb {
+  border-radius: 0 100px 100px 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(47, 79, 255);
+}
+
+* {
+  font-family: "Cormorant Garamond", serif;
+  font-family: "Oswald", sans-serif;
+  font-family: "Quicksand", sans-serif;
+  font-family: "Smooch Sans", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+body {
+  background-color: rgb(0, 0, 37) !important;
+}
+
+.vr {
+  padding: 2px !important;
+  border-radius: 100px;
+}
+
+#column-1,
+#column-2 {
+  height: calc(var(--height-of-screen));
+}
+
+/* Clock */
+#clock {
+  width: var(--width-and-height-of-clock);
+  height: var(--width-and-height-of-clock);
+  background-color: rgb(0, 0, 133);
+}
+
+.scarf {
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  opacity: 1;
+  transform-origin: 0 50%;
+  z-index: 11;
+  margin: 0;
+  box-shadow: 0 0 35px 5px rgba(46, 46, 46, 0.3);
+}
+
+#secondScarf {
+  width: 45%;
+}
+
+#minuteScarf {
+  width: 40%;
+  padding: 0.75px;
+}
+
+#hourScarf {
+  padding: 1px;
+  width: 35%;
+}
+
+#innerCircle {
+  width: calc(var(--width-and-height-of-clock) * 0.88);
+  height: calc(var(--width-and-height-of-clock) * 0.88);
+  z-index: 10;
+  background-color: rgba(0, 0, 73, 0.25);
+}
+
+.divider {
+  background-color: rgb(0, 0, 0);
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  opacity: 0.25;
+}
+
+.oClock {
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: -20px;
+  transform-origin: 48% 100%;
+  height: calc(var(--width-and-height-of-clock) * 0.5);
+  width: calc(var(--width-and-height-of-clock) / 8);
+}
+
+.oClock > h1 {
+  margin: calc(var(--width-and-height-of-clock) / -9) 0 0 0;
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    --width-and-height-of-clock: 300px;
+    --width-of-day-progress: 300px;
+  }
+  .scarf {
+    top: -50px;
+    left: -50px;
+  }
+  .oClock {
+    left: -45px;
+    top: -13px;
+    height: calc(var(--width-and-height-of-clock) * 0.54);
+  }
+}
+
+/**********/
+#lordOfProgress {
+  height: calc(var(--height-of-day-progress) * 1.7);
+  padding: 20px 60px 0 60px;
+  overflow: hidden;
+}
+
+#mainWrapperOfProgress {
+  position: relative;
+}
+
+#dayProgressWrapper {
+  width: var(--width-of-day-progress);
+  height: calc(var(--height-of-day-progress) * 2);
+  border-radius: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+#dayProgressContainer {
+  width: var(--width-of-day-progress);
+  height: var(--height-of-day-progress);
+  overflow: hidden;
+}
+
+#dayProgressBackground {
+  width: var(--width-of-day-progress);
+  height: calc(var(--height-of-day-progress) * 2);
+  border-radius: 100%;
+  border: 1.5px dashed white;
+}
+
+#dayProgressLimiter {
+  position: absolute;
+  width: calc(var(--progress) * 100%);
+  height: var(--height-of-day-progress);
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  border-right: 2px solid white;
+}
+
+#dayProgress {
+  width: var(--width-of-day-progress);
+  height: calc(var(--height-of-day-progress) * 2);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 100%;
+  border: 2px solid white;
+}
+
+#sunOrMoon {
+  transform: translate(-50%, -100%);
+  z-index: 10;
+  position: absolute;
+}
+
+#sunOrMoonInfo {
+  width: var(--width-of-day-progress);
+}
+/************/
+
+a.editNoteIcon {
+  transition: all 0.25s ease-in-out;
+}
+
+a.removeNoteIcon {
+  transition: all 0.4s ease-in-out;
+}
+
+a.editNoteIcon, a.removeNoteIcon {
+  position: relative;
+  left: 100px;
+}
+
+li.noteItemInList:hover a.editNoteIcon {
+  left: 0;
+}
+
+li.noteItemInList:hover a.removeNoteIcon {
+  left: 0;
+}
+
+#notePreview:hover a.editNoteIcon {
+  left: 0;
+}
+
+#notePreview:hover a.removeNoteIcon {
+  left: 0;
+}
+
+
+

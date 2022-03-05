@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Interface</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Oswald:wght@300;395;400;500;600;700&family=Quicksand:wght@300;400;600;700&family=Smooch+Sans:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="text-light">
+    <div class="row p-0 m-0">
+        <div class="col-auto">
+            <div class="d-flex flex-column align-items-center" id="column-1">
+                <div class="ms-3 mb-auto">
+                    <h1 class="display-3 m-0">Hi Amir Vahedi!</h1>
+                    <h1 class="display-6 text-nowrap m-0" id="goodTime">Welcome Back, </h1>
+                    <div class="d-flex my-2">
+                        <h6 class="fs-4 fw-lighter me-auto" id="dateComment"></h6>
+                        <h6 class="fs-4 fw-lighter m-0 d-inline" id="digitalClock"></h6>
+                        <h6 class="fs-4 fw-lighter d-inline ms-1" id="ampm"></h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="fs-4 fw-lighter" id="locationComment">
+                            <i class="fa fa-map-marker-alt pe-1"></i>
+                            Iran, Tehran
+                        </h6>
+                        <h6 class="fs-4 fw-lighter" id="weatherComment">
+                            <i class="fa fa-cloud pe-1"></i>
+                            Cloudy
+                        </h6>
+                        <h6 class="fs-4 fw-lighter" id="weatherComment">
+                            <i class="fa fa-thermometer-quarter pe-1"></i>
+                            23&#8451;
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="position-relative rounded-circle" id="clock">
+                    <div id="innerCircle" class="top-50 start-50 translate-middle position-relative rounded-circle">
+                    </div>
+                    <hr class="scarf bg-danger" id="secondScarf">
+                    <hr class="scarf bg-info" id="minuteScarf">
+                    <hr class="scarf bg-warning" id="hourScarf">
+                    <hr class="divider" style="transform: rotate(0deg);">
+                    <hr class="divider" style="transform: rotate(30deg);">
+                    <hr class="divider" style="transform: rotate(60deg);">
+                    <hr class="divider" style="transform: rotate(90deg);">
+                    <hr class="divider" style="transform: rotate(120deg);">
+                    <hr class="divider" style="transform: rotate(150deg);">
+
+                    <div id="oClocks" class="text-center">
+                        <div class="oClock" id="oClock-0">
+                            <h1>12</h1>
+                        </div>
+                        <div class="oClock" id="oClock-1">
+                            <h1>1</h1>
+                        </div>
+                        <div class="oClock" id="oClock-2">
+                            <h1>2</h1>
+                        </div>
+                        <div class="oClock" id="oClock-3">
+                            <h1>3</h1>
+                        </div>
+                        <div class="oClock" id="oClock-4">
+                            <h1>4</h1>
+                        </div>
+                        <div class="oClock" id="oClock-5">
+                            <h1>5</h1>
+                        </div>
+                        <div class="oClock" id="oClock-6">
+                            <h1>6</h1>
+                        </div>
+                        <div class="oClock" id="oClock-7">
+                            <h1>7</h1>
+                        </div>
+                        <div class="oClock" id="oClock-8">
+                            <h1>8</h1>
+                        </div>
+                        <div class="oClock" id="oClock-9">
+                            <h1>9</h1>
+                        </div>
+                        <div class="oClock" id="oClock-10">
+                            <h1>10</h1>
+                        </div>
+                        <div class="oClock" id="oClock-11">
+                            <h1>11</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 mb-2" id="lordOfProgress">
+                    <div id="mainWrapperOfProgress">
+                        <div class="d-flex flex-row justify-content-between position-absolute top-50"
+                            id="sunOrMoonInfo">
+                            <h6 class="order-first fw-lighter mt-1" id="sunriseInfo">Sunrise: </h6>
+                            <h6 class="order-last fw-lighter mt-1" id="sunsetInfo">Sunset: </h6>
+                        </div>
+                        <i class="fa fa-sun text-warning fs-4" id="sunOrMoon"></i>
+                        <div id="dayProgressWrapper" class="">
+                            <div id="dayProgressContainer">
+                                <div id="dayProgressBackground">
+                                    <div id="dayProgressLimiter">
+                                        <div id="dayProgress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vr p-1 my-auto mx-3 bg-primary" style="height: 85vh;"></div>
+
+        <div class="col-5">
+            <div id="column-2">
+                <h3 class="display-3 text-center fw-lighter">Dashboard</h3>
+                <ul class="nav nav-pills justify-content-center" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                    </li>
+
+                    <div class="vr my-2 mx-2 bg-info rounded-pill "></div>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                    </li>
+
+                    <div class="vr my-2 mx-2 bg-info rounded-pill"></div>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="note-tab" data-bs-toggle="tab" data-bs-target="#note" type="button"
+                            role="tab" aria-controls="note" aria-selected="false">Note</button>
+                    </li>
+
+                    <div class="vr  my-2 mx-2 bg-info rounded-pill "></div>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings"
+                            type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    </div>
+                    <div class="tab-pane fade" id="note" role="tabpanel" aria-labelledby="note-tab">
+                        <div>
+                            <h3 class="display-6 mt-4">Add New Note</h3>
+                            <form class="row">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary bg-opacity-25 text-light"
+                                        id="titleOfNote">Title</span>
+                                    <input type="text" class="form-control bg-primary bg-opacity-25 text-light"
+                                        aria-label="Title of Note" aria-describedby="titleOfNote">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary bg-opacity-25 text-light"
+                                        id="bodyOfNote">Note</span>
+                                    <textarea name="" id="" cols="30" rows="5"
+                                        class="form-control bg-primary bg-opacity-25 text-light h-100"
+                                        aria-label="Body of Note" aria-describedby="bodyOfNote"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center mt-2">
+                                    <button type="reset" class="btn btn-secondary mx-1">Reset</button>
+                                    <button type="button" class="btn btn-primary mx-1">Add</button>
+                                </div>
+                            </form>
+                            <div class="row row-cols-2">
+                                <div>
+                                    <h3 class="display-6 mt-4">Recent Notes</h3>
+                                    <div style="height: 42vh; overflow-y: auto; overflow-x: hidden;" class="rounded-3"
+                                        id="recentNotes">
+                                        <ol class="list-group list-group-numbered gy-2 rounded-0">
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
+                                                <div class="me-auto">
+                                                    <div class="fw-bold">Note 1</div>
+                                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Mollitia, quasi.</small>
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-column justify-content-start align-items-center">
+                                                    <div class="badge bg-primary p-2 rounded-pill">
+                                                        2022/03/05
+                                                    </div>
+                                                    <div
+                                                        class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
+                                                        <a href="#" class="editNoteIcon">
+                                                            <i class="fa fa-edit text-info px-1"></i>
+                                                        </a>
+                                                        <a href="#" class="removeNoteIcon">
+                                                            <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="display-6 mt-4">Preview</h3>
+                                    <div style="height: 42vh; overflow-y: auto; overflow-x: hidden;"
+                                        class="rounded-3 bg-primary bg-opacity-25 position-relative" id="notePreview">
+                                        <div class="d-flex justify-content-between position-sticky top-0 p-3"
+                                            style="background-color: rgba(0, 0, 129, 0.8);">
+                                            <h3 class="fs-3 fw-bold" style="z-index: 10;">Title of the Note</h3>
+                                            <div
+                                                class="d-flex justify-content-center text-center fs-4 my-auto editAndRemoveIcons">
+                                                <a href="#" class="editNoteIcon">
+                                                    <i class="fa fa-edit text-info px-1"></i>
+                                                </a>
+                                                <a href="#" class="removeNoteIcon">
+                                                    <i class="fa fa-trash-alt text-warning px-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p class="p-3" style="z-index: 1 !important;">Lorem ipsum dolor sit amet
+                                            consectetur adipisicing elit.
+                                            Assumenda molestias
+                                            maiores labore quam quibusdam facilis possimus atque expedita esse ipsum ad
+                                            quos, quo quidem quis alias tempore, cumque qui eius eligendi? Corrupti
+                                            atque ab accusamus nisi optio provident omnis ratione autem et mollitia
+                                            voluptate alias ea id at maiores amet doloribus tempore, pariatur tenetur,
+                                            dolore soluta doloremque sed molestiae. Placeat qui quasi officiis
+                                            voluptatum quas aliquam, illo doloribus commodi non blanditiis accusamus
+                                            harum fugit distinctio nulla vero corporis! Sequi facere beatae, nihil
+                                            praesentium, perspiciatis excepturi enim unde sint, debitis omnis ad
+                                            obcaecati sapiente ducimus ullam iste pariatur sit maiores est?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                        <div class="row">
+                            <nav id="settingsNavbar"
+                                class="navbar flex-column justify-content-start align-items-stretch col-3">
+                                <a href="#" class="navbar-brand align-self-start p-0 m-0">Settings</a>
+                                <nav class="nav flex-column nav-pills">
+                                    <a href="#item-1" class="nav-link px-4">Item 1</a>
+                                    <a href="#item-2" class="nav-link px-4">Item 2</a>
+                                    <a href="#item-3" class="nav-link px-4">Item 3</a>
+                                </nav>
+                            </nav>
+                            <div class="col-9 mt-3" data-bs-spy="scroll" data-bs-target="#settingsNavbar"
+                                style="height: 70vh; overflow-y:auto; scroll-behavior: smooth;" data-bs-offset="0"
+                                tabindex="0">
+                                <h4 id="item-1">Item 1</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, velit? Lorem
+                                    ipsum, dolor sit amet consectetur adipisicing elit. Omnis dicta ipsa non ex
+                                    voluptatem dolores corporis, vel fugiat inventore! Dolor odio eveniet similique
+                                    minima aspernatur, ex animi, molestiae fugit necessitatibus enim alias dolore.
+                                    Quaerat tempora, omnis numquam soluta impedit maxime cum sint natus laborum quos
+                                    eveniet. Beatae maiores, atque cum reiciendis incidunt laborum quam officia,
+                                    blanditiis nostrum distinctio ratione dolorum inventore doloribus commodi, eum
+                                    magni. Iure ad et exercitationem qui distinctio deserunt blanditiis dolore
+                                    perferendis est fuga dolores fugit quaerat dignissimos, perspiciatis eaque
+                                    ducimus impedit tenetur vitae illum officiis tempora esse quo soluta quisquam?
+                                    Eveniet ipsam, illo expedita, harum ducimus eum quos veniam obcaecati, quo
+                                    officia nesciunt vitae? Maxime, perspiciatis? Facilis, expedita temporibus?
+                                    Architecto commodi sapiente molestiae, quaerat nostrum earum aut pariatur. Nobis
+                                    officiis porro deleniti quas repellat doloribus saepe. Culpa quaerat quod
+                                    provident consequuntur accusamus vero voluptas earum laudantium obcaecati veniam
+                                    cumque, aliquam eveniet, tempore dolore id laborum rem, adipisci harum alias hic
+                                    autem. Temporibus corrupti eveniet distinctio modi animi labore laudantium nulla
+                                    quisquam, quasi voluptatem veritatis ab numquam doloremque reiciendis sed
+                                    accusantium cupiditate mollitia magnam ipsum obcaecati qui quis fugit. Expedita
+                                    cupiditate, blanditiis harum voluptatem necessitatibus non vero, exercitationem
+                                    nesciunt quo sed maiores ducimus! Enim, animi. Nemo laudantium ab quod animi,
+                                    vero possimus neque modi provident, officiis optio atque obcaecati perferendis,
+                                    repellat illum aut. Iste perferendis minima blanditiis. Nisi perspiciatis sequi
+                                    nihil aut, odio in optio, libero sed voluptas, a id non aperiam temporibus
+                                    beatae fugiat. Non fugit sunt magni quo tempore reprehenderit debitis dicta
+                                    facere deleniti eaque! Ratione consequuntur placeat ex accusantium possimus
+                                    magnam libero dolorum accusamus ipsum voluptas blanditiis quisquam dolorem,
+                                    deleniti maxime et unde, eveniet sed quo neque dolores labore. Quos quis dolor,
+                                    incidunt nulla consequatur quasi sit distinctio illo sint autem nisi recusandae
+                                    eveniet quod corrupti, beatae doloribus tempore illum, error culpa voluptates
+                                    ea. Ut, reiciendis magni laudantium impedit alias velit tenetur repellendus
+                                    perspiciatis asperiores eveniet iusto exercitationem libero eius inventore
+                                    officia qui? Cum esse neque saepe aliquid iste delectus optio iure
+                                    exercitationem quod. Ipsa dolorem ad illum. Sequi repellat, ut illum rerum
+                                    voluptas facilis, dolor esse iste quaerat eum nam repellendus alias commodi
+                                    delectus, quos labore. Tempore modi suscipit quibusdam esse, sed nulla quaerat
+                                    corrupti deserunt! Velit, nisi similique adipisci ducimus provident sapiente,
+                                    doloribus sed, eveniet iure minus dolorum sint. Sed eligendi deserunt sequi
+                                    rerum dolorem minus eaque unde ex ipsa officiis odio cupiditate nobis similique
+                                    optio modi eius, iure eos maiores ad esse nulla quisquam necessitatibus
+                                    doloribus ut. Laudantium exercitationem explicabo aspernatur ipsam nam. Mollitia
+                                    dolores rem possimus quis. Aperiam officia laborum quia, pariatur odit
+                                    laudantium et quae molestiae ipsum architecto tempore ea neque tempora nisi
+                                    nesciunt maxime deserunt omnis ratione aliquid eveniet? Molestiae placeat,
+                                    asperiores aperiam eum tempore libero quibusdam reiciendis nisi quaerat fugiat
+                                    sed. Adipisci officia nam quo earum tempore nisi facere accusamus! Minima
+                                    deserunt ratione distinctio odio sunt fugiat iusto ipsam architecto nemo eaque
+                                    in rerum animi sint dolorum, quae doloribus ab? Rerum id repudiandae, earum sunt
+                                    inventore itaque natus a pariatur cum necessitatibus totam temporibus ut labore
+                                    laudantium beatae officia tenetur possimus incidunt in placeat. Vel praesentium
+                                    mollitia sed dignissimos obcaecati illum dolores, facilis libero nemo officia
+                                    tempora, similique velit nostrum porro maxime id placeat! Cumque odio et quidem,
+                                    nisi nemo nulla iste! Obcaecati possimus accusantium dolorum similique
+                                    praesentium quaerat necessitatibus cumque mollitia quia laudantium accusamus, ea
+                                    id voluptas explicabo. Adipisci, beatae voluptate culpa numquam natus quasi in
+                                    nihil at enim illum! Reiciendis rerum, quasi asperiores illum officia non,
+                                    commodi beatae libero molestias amet hic. Magni, enim ipsum. Quas, repellendus
+                                    possimus quo, tenetur nesciunt voluptatem aliquid optio nobis atque expedita
+                                    nulla inventore id aperiam veritatis adipisci accusantium praesentium et ipsam
+                                    ex quasi nemo. Ipsum voluptate rem est nemo error, expedita ut sunt aliquam
+                                    dignissimos recusandae autem! Consectetur possimus eius magnam dolores ratione
+                                    necessitatibus, nobis corrupti aperiam debitis facere? Officia adipisci itaque
+                                    maiores aspernatur fugiat esse nostrum maxime, explicabo sunt omnis consequatur
+                                    alias nulla, eveniet pariatur, quo vitae repudiandae illum provident veritatis
+                                    minus perspiciatis. Quo in ullam, soluta omnis deleniti eligendi explicabo,
+                                    repudiandae ut quae error dolores corporis harum ad adipisci blanditiis
+                                    laudantium a consequuntur! Voluptatum tenetur est dolor, voluptas impedit qui
+                                    adipisci eveniet ipsam dignissimos facilis consequatur obcaecati cumque tempora
+                                    aspernatur consectetur eos laborum accusantium eaque! Blanditiis consequuntur
+                                    aliquam quam quae, fuga voluptas ducimus inventore in, rerum, reprehenderit nam?
+                                    Officiis, dignissimos? Aliquid impedit ab voluptas, officia tempora nihil vel
+                                    nam quasi a quisquam reprehenderit possimus quis odio mollitia rerum aperiam,
+                                    voluptatem laudantium quia eligendi. Tenetur esse maiores, quis porro, deleniti
+                                    ex molestiae facere delectus ad aliquid ullam ab a illum illo! Rem, laboriosam
+                                    enim! Quasi nesciunt vel ex obcaecati quidem fugiat laborum dignissimos
+                                    laudantium soluta magni quaerat est amet, in voluptatum sed, natus, autem
+                                    ratione laboriosam. Dolores debitis similique quo, nam officia, eligendi
+                                    obcaecati totam corrupti incidunt, sint soluta iure nisi aspernatur. Sed culpa
+                                    debitis molestias nobis, fugit obcaecati tempore reprehenderit perspiciatis
+                                    consequuntur ducimus architecto totam esse inventore dolore sint facere ipsa.
+                                    Explicabo, dignissimos ad praesentium natus inventore esse consequuntur aliquam
+                                    quasi reiciendis commodi, molestiae voluptatem porro. Assumenda, eaque deleniti
+                                    est quaerat facilis sunt, modi veritatis iure doloribus similique debitis quae
+                                    officia illo hic recusandae quidem ipsum nobis dolores. Veniam, aut ipsa illo
+                                    temporibus corrupti praesentium autem, a repellendus vel veritatis nobis, itaque
+                                    velit atque quaerat debitis repudiandae voluptatum numquam saepe perferendis
+                                    magnam corporis? Architecto non doloremque labore accusantium, perferendis sequi
+                                    quaerat reprehenderit exercitationem voluptatum numquam voluptatibus dolores
+                                    iusto at fugit ratione iure velit quasi excepturi accusamus! Tempora magni
+                                    rerum, atque mollitia ut assumenda officiis illo est architecto velit minus
+                                    doloribus incidunt iure. Quia mollitia deserunt, quam obcaecati, optio, qui
+                                    rerum pariatur numquam perferendis voluptates ab! Asperiores facilis, repellat,
+                                    dicta, corporis aliquid harum expedita ratione magnam odio quas ullam vero eaque
+                                    alias cumque laborum. Quis dolores delectus non ipsum ad, rerum repellat ipsa
+                                    neque iusto iste nemo obcaecati aliquid, debitis rem suscipit voluptate, culpa
+                                    id animi nisi nesciunt quibusdam ea accusamus! Ipsa esse voluptate asperiores
+                                    voluptatibus repellendus. Sint iusto numquam quia dolor laborum commodi tenetur
+                                    soluta quo, perferendis iure dolorem sit dicta, cum, mollitia quos consectetur
+                                    expedita accusamus.</p>
+                                <h4 id="item-2">Item 2</h4>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique, ut!</p>
+                                <h4 id="item-3">Item 3</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nemo?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vr p-1 my-auto mx-3 bg-primary" style="height: 85vh;"></div>
+
+    </div>
+    <script src="./javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
