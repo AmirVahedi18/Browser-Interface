@@ -24,12 +24,18 @@ const months = [
   "November",
   "December",
 ];
+
+var user = {
+  firstName: null,
+  lastName: null,
+};
+
+var currentDate = new Date();
+var hours = currentDate.getHours();
+var minutes = currentDate.getMinutes();
+var seconds = currentDate.getMinutes();
 var heightOfWindow;
 var widthOfWindow;
-var currentDate;
-var hours;
-var minutes;
-var seconds;
 var widthOfProgress;
 var heightOfProgress;
 var progress;
@@ -38,54 +44,79 @@ var usingTowlveHours = true;
 var isSun = null;
 
 var sunrise = {
-  hours: 6,
-  minutes: 35,
+  sunriseHours: 6,
+  sunriseMinutes: 35,
   toStringSunrise: function () {
-    return setZero(this.hours.toString()) + ":" + setZero(this.minutes);
+    return (
+      setZero(this.sunriseHours.toString()) + ":" + setZero(this.sunriseMinutes)
+    );
   },
 };
 
 var sunset = {
-  hours: 18,
-  minutes: 1,
+  sunsetHours: 18,
+  sunsetMinutes: 1,
   toStringSunset: function () {
-    return setZero(this.hours.toString()) + ":" + setZero(this.minutes);
+    return (
+      setZero(this.sunsetHours.toString()) + ":" + setZero(this.sunsetMinutes)
+    );
   },
 };
 
-setTimeVars();
-const brackpointOfSunrise = sunrise.hours * 3600 + sunrise.minutes * 60;
-const brackpointOfSunset = sunset.hours * 3600 + sunset.minutes * 60;
+var brackpointOfSunrise =
+  sunrise.sunriseHours * 3600 + sunrise.sunriseMinutes * 60;
+var brackpointOfSunset = sunset.sunsetHours * 3600 + sunset.sunsetMinutes * 60;
 var spentInSeconds = hours * 3600 + minutes * 60 + seconds;
 var sunInSky = brackpointOfSunset - brackpointOfSunrise;
 var sunIsNotInSky = 86400 - sunInSky;
 
+window.onresize = onResizeFunctions;
+
 inisialation();
 
-function inisialation() {
-  updateResolution();
-  setTimeVars();
+async function inisialation() {
+  await getUserInfoFromJSON();
+  downloadJSONConfig(JSON.stringify(user), "user.json", "text/plain");
+  sayHiToUser();
   goodTime();
   setDate();
-  setTransitionToOClocks();
-  setSunriseAndSunsetInfo();
   timeInterval();
   setSeconds();
   setMinutes();
   setHours();
-  setWidthAndHeight();
   calcProgress();
   setProgress();
+  setTransitionToOClocks();
+  setSunriseAndSunsetInfo();
+  updateResolution();
+  setWidthAndHeight();
   calcHeightOfSun();
   positionTheSun();
 }
 
-// Function to initialize the time variables
-function setTimeVars() {
-  currentDate = new Date();
-  hours = currentDate.getHours();
-  minutes = currentDate.getMinutes();
-  seconds = currentDate.getSeconds();
+// Function to change some parameters when window size is changes
+function onResizeFunctions() {
+  updateResolution();
+  setWidthAndHeight();
+  calcHeightOfSun();
+  positionTheSun();
+}
+
+// function to get info from JSON file
+async function getUserInfoFromJSON() {
+  await fetch("user.json")
+    .then((response) => response.json())
+    .then((json) => (user = json));
+}
+
+// function to say hi to the user
+function sayHiToUser() {
+  let sayHiComment = "Hi ";
+  user.firstName ? (sayHiComment += user.firstName) : null;
+  user.lastName ? (sayHiComment += " " + user.lastName) : null;
+  user.firstName || user.lastName
+    ? (document.getElementById("sayHiToUser").innerHTML = sayHiComment + "!")
+    : null;
 }
 
 // Function to set the good time comment
@@ -327,11 +358,11 @@ function updateResolution() {
   setResolution();
 }
 
-window.onresize = onResizeFunctions;
 
-function onResizeFunctions() {
-  updateResolution();
-  setWidthAndHeight();
-  calcHeightOfSun();
-  positionTheSun();
+// Function to save JSON file of user config
+function downloadJSONConfig(content, fileName, contentType) {
+  let link = document.getElementById("downloadJSON");
+  var file = new Blob([content], {type: contentType});
+  link.href = URL.createObjectURL(file);
+  link.download = fileName;
 }
