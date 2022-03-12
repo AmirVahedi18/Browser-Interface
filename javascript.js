@@ -80,8 +80,7 @@ async function inisialation() {
   await getUserInfoFromJSON();
   await getNotesFromJSON();
   initialaizeRecentNotes();
-  //downloadUserJSON(JSON.stringify(user), "user.json", "text/plain");
-  //downloadUserJSON(JSON.stringify(notes), "notes.json", "text/plain");
+  shiftNthItemToTheMthPlace();
   setValueToChangeFormInputs();
   sayHiToUser();
   goodTime();

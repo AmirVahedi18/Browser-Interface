@@ -42,11 +42,8 @@
 }
 
 * {
-  font-family: "Cormorant Garamond", serif;
-  font-family: "Oswald", sans-serif;
-  font-family: "Quicksand", sans-serif;
-  font-family: "Smooch Sans", sans-serif;
   font-family: "Source Sans Pro", sans-serif;
+  transition: all 0.25s;
 }
 
 body {
@@ -214,15 +211,20 @@ a.removeNoteIcon {
   transition: all 0.3s ease-in-out;
 }
 
+a.closeNoteIcon {
+  transition: all 0.4s ease-in-out;
+}
+
 a.saveNoteIcon {
   transition: all 0.2s ease-in-out;
 }
 
 a.editNoteIcon,
 a.removeNoteIcon,
-a.saveNoteIcon {
+a.saveNoteIcon,
+a.closeNoteIcon {
   position: relative;
-  left: 100px;
+  left: 110px;
   z-index: 100;
 }
 
@@ -245,3 +247,9 @@ li.noteItemInList:hover a.removeNoteIcon {
 #notePreview:hover a.saveNoteIcon {
   left: 0;
 }
+
+#notePreview:hover a.closeNoteIcon {
+  left: 0;
+}
+
+

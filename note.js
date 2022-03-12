@@ -10,6 +10,7 @@ function initialaizeRecentNotes() {
   }
 }
 
+// Function to creat a note itme list
 function createNoteItemList(JSONNote, i) {
   let title = document.createElement("div");
   title.classList.add("fw-bold");
@@ -41,7 +42,7 @@ function createNoteItemList(JSONNote, i) {
     "editAndRemoveIcons"
   );
   icons.innerHTML = `<a href="###" class="editNoteIcon"> <i class="fa fa-edit text-info px-1"></i> </a> 
-   <a href="##" class="removeNoteIcon"> <i class="fa fa-trash-alt text-warning px-1"></i> </a>`;
+   <a href="##" class="removeNoteIcon" onclick="removeNoteItem(${i})"> <i class="fa fa-trash-alt text-warning px-1"></i> </a>`;
   let dateAndIcons = document.createElement("div");
   dateAndIcons.classList.add(
     "d-flex",
@@ -51,6 +52,11 @@ function createNoteItemList(JSONNote, i) {
   );
   dateAndIcons.appendChild(date);
   dateAndIcons.appendChild(icons);
+
+  let radioInput = document.createElement("input");
+  radioInput.type = "radio";
+  radioInput.name = "radioInputForNoteItem";
+  radioInput.classList.add("isFoucesd", "d-none");
 
   let listItemOfNote = document.createElement("li");
   listItemOfNote.classList.add(
@@ -63,7 +69,9 @@ function createNoteItemList(JSONNote, i) {
     "text-light",
     "position-relative"
   );
-  listItemOfNote.innerHTML = `<a href="#" class="stretched-link" onclick="createNotePreview(${i})"></a>`;
+  listItemOfNote.innerHTML = `<a class="stretched-link" onclick="createNotePreview(${i}); indicateSelectedNoteItem(${i});"
+  ondblclick="reorderRecentNotes(event, ${i})" onmouseenter="indicateHoveredNoteItem(${i}, 'in')" onmouseout="indicateHoveredNoteItem(${i}, 'out')"></a>`;
+  listItemOfNote.appendChild(radioInput);
   listItemOfNote.appendChild(header);
   listItemOfNote.appendChild(dateAndIcons);
   listItemOfNote.onclick = switchToPreview;
@@ -80,22 +88,32 @@ async function createNotePreview(index) {
   let iconsOfEditing = document.getElementById("iconsForEditing");
   iconsOfEditing.innerHTML = `<a href="#" onclick="switchToEditing(${index})" class="editNoteIcon noteIcon"> <i class="fa fa-edit text-info px-1"></i> </a>
    <a href="#" onclick="saveNewChanges(${index})" class="saveNoteIcon noteIcon d-none"> <i class="fa fa-save text-info px-1 pe-2"></i>
-   <a href="#" class="removeNoteIcon noteIcon"> <i class="fa fa-trash-alt text-warning px-1"></i> </a>`;
+   <a href="#" onclick="removeNoteItem(${index})" class="removeNoteIcon noteIcon"> <i class="fa fa-trash-alt text-warning px-1"></i> </a>
+   <a href="#" onclick="clearPreview()" class="closeNoteIcon noteIcon"> <i class="fa fa-times-circle text-danger px-1"></i> </a>`;
 }
 
-// Functiont to switch to editiig note
+// Functiont to switch to editing note
 function switchToEditing(index) {
   document.getElementById("contentOfNotePreview").style.display = "none";
   document.getElementById("textareaForEditing").style.display = "block";
   document.getElementById("textareaForEditing").innerText =
     notes["notes"][index]["content"];
   changeIconOfEditToSave("edit");
+  document.getElementById("notePreviewTitle").innerHTML = "Edit Note";
 }
 
 // Function to change the state of note to preview
 function switchToPreview() {
   document.getElementById("contentOfNotePreview").style.display = "block";
   document.getElementById("textareaForEditing").style.display = "none";
+}
+
+// Function to clear preview
+function clearPreview() {
+  document.getElementById("contentOfNotePreview").innerHTML = null;
+  document.getElementById("titleOfNotePreview").innerHTML = null;
+  refreshRecentNote();
+  document.getElementById("notePreviewTitle").innerHTML = "Preview";
 }
 
 // Function to change the display of icons
@@ -124,7 +142,6 @@ function saveNewNote() {
   if (titleOfNewNote == "" || contentOfNewNote == "") {
     return;
   }
-  console.log(titleOfNewNote, contentOfNewNote);
   let saveDtate = new Date().getTime();
   let note = {
     title: titleOfNewNote,
@@ -147,15 +164,88 @@ function saveNewChanges(index) {
   notes["notes"][index]["content"] = changedContent;
   changeIconOfEditToSave("save");
   switchToPreview();
-  document.getElementById("recentNotesList").innerHTML = null;
-  initialaizeRecentNotes();
+  refreshRecentNote();
   document.getElementById("contentOfNotePreview").innerHTML = changedContent;
+  document.getElementById("notePreviewTitle").innerHTML = "Preview";
 }
 
 // Function to download json file of notes
 function downloadUserJSON(content, fileName, contentType) {
-    let link = document.getElementById("downloadNoteJSON");
-    let file = new Blob([content], { type: contentType });
-    link.href = URL.createObjectURL(file);
-    link.download = fileName;
+  let link = document.getElementById("downloadNoteJSON");
+  let file = new Blob([content], { type: contentType });
+  link.href = URL.createObjectURL(file);
+  link.download = fileName;
+}
+
+// Function to reorder recent notes
+function reorderRecentNotes(event, index) {
+  if (index == 0) {
+    return;
   }
+  let listOfRecentNote = notes["notes"];
+  event.ctrlKey
+    ? shiftNthItemToTheMthPlace(index, 0, listOfRecentNote)
+    : shiftNthItemToTheMthPlace(index, index - 1, listOfRecentNote);
+  refreshRecentNote();
+}
+
+// Function to reorder list
+function shiftNthItemToTheMthPlace(n, m, list) {
+  if (n > m) {
+    for (let i = n; i > m; i--) {
+      let temp = list[i];
+      list[i] = list[i - 1];
+      list[i - 1] = temp;
+    }
+  }
+}
+
+// Function to remove a note item
+function removeNoteItem(nthItem) {
+  let noteList = notes["notes"];
+  noteList = noteList.filter(function (value, index) {
+    return index != nthItem;
+  });
+  notes["notes"] = noteList;
+  clearPreview();
+  refreshRecentNote();
+}
+
+// Function to refresh the recent notes list
+function refreshRecentNote() {
+  document.getElementById("recentNotesList").innerHTML = null;
+  initialaizeRecentNotes();
+}
+
+// Function to indicate the selected item
+function indicateSelectedNoteItem(index) {
+  let allListItems = document.getElementById("recentNotesList").children;
+  let selectedListItem = allListItems[index];
+  let inputOfItem = selectedListItem.querySelector("input");
+  inputOfItem.checked = true;
+  for (let eachLiItem of allListItems) {
+    let inputOfEachLiItem = eachLiItem.querySelector("input");
+    if (inputOfEachLiItem.checked) {
+      eachLiItem.classList.replace("bg-opacity-25", "bg-opacity-10");
+    } else {
+      eachLiItem.classList.replace("bg-opacity-10", "bg-opacity-25");
+    }
+  }
+}
+
+// Function to indicate the hovered item
+function indicateHoveredNoteItem(index, inOrOut) {
+  let allListItems = document.getElementById("recentNotesList").children;
+  let selectedListItem = allListItems[index];
+  switch (inOrOut) {
+    case "in": {
+      selectedListItem.classList.remove("bg-primary");
+      selectedListItem.style.backgroundColor = "rgba(0, 10, 200, 0.25)";
+      break;
+    }
+    case "out": {
+      selectedListItem.classList.add("bg-primary");
+      break;
+    }
+  }
+}
