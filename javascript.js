@@ -30,6 +30,8 @@ var user = {
   lastName: null,
 };
 
+var notes;
+
 var currentDate = new Date();
 var hours = currentDate.getHours();
 var minutes = currentDate.getMinutes();
@@ -76,7 +78,11 @@ inisialation();
 
 async function inisialation() {
   await getUserInfoFromJSON();
-  downloadJSONConfig(JSON.stringify(user), "user.json", "text/plain");
+  await getNotesFromJSON();
+  initialaizeRecentNotes();
+  //downloadUserJSON(JSON.stringify(user), "user.json", "text/plain");
+  //downloadUserJSON(JSON.stringify(notes), "notes.json", "text/plain");
+  setValueToChangeFormInputs();
   sayHiToUser();
   goodTime();
   setDate();
@@ -107,6 +113,12 @@ async function getUserInfoFromJSON() {
   await fetch("user.json")
     .then((response) => response.json())
     .then((json) => (user = json));
+}
+
+async function getNotesFromJSON() {
+  await fetch("notes.json")
+    .then((response) => response.json())
+    .then((json) => (notes = json));
 }
 
 // function to say hi to the user
@@ -358,11 +370,39 @@ function updateResolution() {
   setResolution();
 }
 
-
 // Function to save JSON file of user config
-function downloadJSONConfig(content, fileName, contentType) {
-  let link = document.getElementById("downloadJSON");
-  var file = new Blob([content], {type: contentType});
+function downloadUserJSON(content, fileName, contentType) {
+  let link = document.getElementById("downloadUserJSON");
+  let file = new Blob([content], { type: contentType });
   link.href = URL.createObjectURL(file);
   link.download = fileName;
 }
+
+function setValueToChangeFormInputs() {
+  let changeNameForm = document.getElementById("changeNameForm");
+  let inputs = changeNameForm.querySelectorAll("input");
+  inputs[0].value = user.firstName;
+  inputs[1].value = user.lastName;
+}
+
+function enableSubmit() {
+  let submitChangeNameButton = document.getElementById(
+    "submitChangeNameButton"
+  );
+  submitChangeNameButton.disabled = false;
+}
+
+// Function to get data from nameChangeForm
+function getChangedNameFromInputs() {
+  let changeNameForm = document.getElementById("changeNameForm");
+  let inputs = changeNameForm.querySelectorAll("input");
+  user.firstName = inputs[0].value;
+  user.lastName = inputs[1].value;
+  sayHiToUser();
+  downloadUserJSON(JSON.stringify(user), "user.json", "text/plain");
+  let submitChangeNameButton = document.getElementById(
+    "submitChangeNameButton"
+  );
+  submitChangeNameButton.disabled = true;
+}
+

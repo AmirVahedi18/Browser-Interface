@@ -207,16 +207,23 @@ body {
 /************/
 
 a.editNoteIcon {
-  transition: all 0.25s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 a.removeNoteIcon {
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-a.editNoteIcon, a.removeNoteIcon {
+a.saveNoteIcon {
+  transition: all 0.2s ease-in-out;
+}
+
+a.editNoteIcon,
+a.removeNoteIcon,
+a.saveNoteIcon {
   position: relative;
   left: 100px;
+  z-index: 100;
 }
 
 li.noteItemInList:hover a.editNoteIcon {
@@ -232,5 +239,9 @@ li.noteItemInList:hover a.removeNoteIcon {
 }
 
 #notePreview:hover a.removeNoteIcon {
+  left: 0;
+}
+
+#notePreview:hover a.saveNoteIcon {
   left: 0;
 }

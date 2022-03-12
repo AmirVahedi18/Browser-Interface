@@ -24,7 +24,7 @@
 
 <body class="text-light">
     <div class="row p-0 m-0">
-        <div class="d-flex flex-column align-items-center col-auto" id="column-1">
+        <div class="d-flex flex-column align-items-center col-auto d-non" id="column-1">
             <div class="ms-3 mb-auto">
                 <h1 class="display-3 m-0" id="sayHiToUser">Hi Dear!</h1>
                 <h1 class="display-6 text-nowrap m-0" id="goodTime">Welcome Back, </h1>
@@ -47,7 +47,10 @@
                         23&#8451;
                     </h6>
                 </div>
-                <a id="downloadJSON" class="btn btn-outline-primary rounded-pill mt-2">Download JSON</a>
+                <a id="downloadUserJSON" class="btn btn-sm btn-outline-primary rounded-pill mt-2"
+                    onclick='downloadUserJSON(JSON.stringify(user), "user.json", "text/plain")'>Download User JSON</a>
+                <a id="downloadNoteJSON" class="btn btn-sm btn-outline-primary rounded-pill mt-2"
+                    onclick='downloadUserJSON(JSON.stringify(notes), "notes.json", "text/plain")'>Download Note JSON</a>
             </div>
 
             <div class="position-relative rounded-circle" id="clock">
@@ -123,7 +126,7 @@
             </div>
         </div>
 
-        <div class="vr p-1 my-auto mx-3 bg-primary" style="height: 85vh;"></div>
+        <div class="vr p-1 my-auto mx-3 bg-primary d-non" style="height: 85vh;"></div>
 
         <div class="col-5" id="column-2">
             <h3 class="display-3 text-center fw-lighter">Dashboard</h3>
@@ -417,23 +420,23 @@
 
                 <div class="tab-pane fade" id="note" role="tabpanel" aria-labelledby="note-tab">
                     <h3 class="display-6">Add New Note</h3>
-                    <form class="row">
+                    <form method="dialog" class="row">
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-primary bg-opacity-25 text-light"
                                 id="titleOfNote">Title</span>
                             <input type="text" class="form-control bg-primary bg-opacity-25 text-light"
-                                aria-label="Title of Note" aria-describedby="titleOfNote">
+                                aria-label="Title of Note" id="titleOfNewNote" aria-describedby="titleOfNote" required>
                         </div>
                         <div class="input-group">
                             <span class="input-group-text bg-primary bg-opacity-25 text-light"
                                 id="bodyOfNote">Note</span>
-                            <textarea name="" id="" cols="30" rows="5"
-                                class="form-control bg-primary bg-opacity-25 text-light h-100" aria-label="Body of Note"
-                                aria-describedby="bodyOfNote"></textarea>
+                            <textarea class="form-control bg-primary bg-opacity-25 text-light h-100"
+                                id="contentOfNewNote" rows="5" aria-label="Body of Note" aria-describedby="bodyOfNote"
+                                required></textarea>
                         </div>
                         <div class="d-flex justify-content-center mt-2">
-                            <button type="reset" class="btn btn-secondary mx-1">Reset</button>
-                            <button type="button" class="btn btn-primary mx-1">Add</button>
+                            <button type="reset" class="btn btn-outline-warning mx-1">Reset</button>
+                            <button type="submit" class="btn btn-primary mx-1" onclick="saveNewNote()">Add</button>
                         </div>
                     </form>
                     <div class="row row-cols-2">
@@ -441,139 +444,7 @@
                             <h3 class="display-6 mt-4">Recent Notes</h3>
                             <div style="height: 42vh; overflow-y: auto; overflow-x: hidden;" class="rounded-3"
                                 id="recentNotes">
-                                <ol class="list-group list-group-numbered gy-2 rounded-0">
-                                    <li
-                                        class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
-                                        <div class="me-auto">
-                                            <div class="fw-bold">Note 1</div>
-                                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Mollitia, quasi.</small>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-start align-items-center">
-                                            <div class="badge bg-primary p-2 rounded-pill">
-                                                2022/03/05
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
-                                                <a href="#" class="editNoteIcon">
-                                                    <i class="fa fa-edit text-info px-1"></i>
-                                                </a>
-                                                <a href="#" class="removeNoteIcon">
-                                                    <i class="fa fa-trash-alt text-warning px-1"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li
-                                        class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
-                                        <div class="me-auto">
-                                            <div class="fw-bold">Note 1</div>
-                                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Mollitia, quasi.</small>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-start align-items-center">
-                                            <div class="badge bg-primary p-2 rounded-pill">
-                                                2022/03/05
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
-                                                <a href="#" class="editNoteIcon">
-                                                    <i class="fa fa-edit text-info px-1"></i>
-                                                </a>
-                                                <a href="#" class="removeNoteIcon">
-                                                    <i class="fa fa-trash-alt text-warning px-1"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li
-                                        class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
-                                        <div class="me-auto">
-                                            <div class="fw-bold">Note 1</div>
-                                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Mollitia, quasi.</small>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-start align-items-center">
-                                            <div class="badge bg-primary p-2 rounded-pill">
-                                                2022/03/05
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
-                                                <a href="#" class="editNoteIcon">
-                                                    <i class="fa fa-edit text-info px-1"></i>
-                                                </a>
-                                                <a href="#" class="removeNoteIcon">
-                                                    <i class="fa fa-trash-alt text-warning px-1"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li
-                                        class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
-                                        <div class="me-auto">
-                                            <div class="fw-bold">Note 1</div>
-                                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Mollitia, quasi.</small>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-start align-items-center">
-                                            <div class="badge bg-primary p-2 rounded-pill">
-                                                2022/03/05
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
-                                                <a href="#" class="editNoteIcon">
-                                                    <i class="fa fa-edit text-info px-1"></i>
-                                                </a>
-                                                <a href="#" class="removeNoteIcon">
-                                                    <i class="fa fa-trash-alt text-warning px-1"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li
-                                        class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
-                                        <div class="me-auto">
-                                            <div class="fw-bold">Note 1</div>
-                                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Mollitia, quasi.</small>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-start align-items-center">
-                                            <div class="badge bg-primary p-2 rounded-pill">
-                                                2022/03/05
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
-                                                <a href="#" class="editNoteIcon">
-                                                    <i class="fa fa-edit text-info px-1"></i>
-                                                </a>
-                                                <a href="#" class="removeNoteIcon">
-                                                    <i class="fa fa-trash-alt text-warning px-1"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li
-                                        class="list-group-item w-100 d-flex noteItemInList bg-primary bg-opacity-25 text-light">
-                                        <div class="me-auto">
-                                            <div class="fw-bold">Note 1</div>
-                                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Mollitia, quasi.</small>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-start align-items-center">
-                                            <div class="badge bg-primary p-2 rounded-pill">
-                                                2022/03/05
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center text-center fs-5 my-auto editAndRemoveIcons">
-                                                <a href="#" class="editNoteIcon">
-                                                    <i class="fa fa-edit text-info px-1"></i>
-                                                </a>
-                                                <a href="#" class="removeNoteIcon">
-                                                    <i class="fa fa-trash-alt text-warning px-1"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                <ol class="list-group list-group-numbered gy-2 rounded-0" id="recentNotesList">
                                 </ol>
                             </div>
                         </div>
@@ -581,31 +452,16 @@
                             <h3 class="display-6 mt-4">Preview</h3>
                             <div style="height: 42vh; overflow-y: auto; overflow-x: hidden;"
                                 class="rounded-3 bg-primary bg-opacity-25 position-relative" id="notePreview">
-                                <div class="d-flex justify-content-between position-sticky top-0 p-3"
-                                    style="background-color: rgba(0, 0, 129, 0.8);">
-                                    <h3 class="fs-3 fw-bold" style="z-index: 10;">Title of the Note</h3>
-                                    <div
+                                <div class="d-flex justify-content-between align-items-center position-sticky top-0 p-3"
+                                    style="background-color: rgba(0, 0, 129, 0.8); height: 8vh;">
+                                    <h3 class="fs-3 fw-bold m-0" style="z-index: 10;" id="titleOfNotePreview"></h3>
+                                    <div id="iconsForEditing"
                                         class="d-flex justify-content-center text-center fs-4 my-auto editAndRemoveIcons">
-                                        <a href="#" class="editNoteIcon">
-                                            <i class="fa fa-edit text-info px-1"></i>
-                                        </a>
-                                        <a href="#" class="removeNoteIcon">
-                                            <i class="fa fa-trash-alt text-warning px-1"></i>
-                                        </a>
                                     </div>
                                 </div>
-                                <p class="p-3" style="z-index: 1 !important;">Lorem ipsum dolor sit amet
-                                    consectetur adipisicing elit.
-                                    Assumenda molestias
-                                    maiores labore quam quibusdam facilis possimus atque expedita esse ipsum ad
-                                    quos, quo quidem quis alias tempore, cumque qui eius eligendi? Corrupti
-                                    atque ab accusamus nisi optio provident omnis ratione autem et mollitia
-                                    voluptate alias ea id at maiores amet doloribus tempore, pariatur tenetur,
-                                    dolore soluta doloremque sed molestiae. Placeat qui quasi officiis
-                                    voluptatum quas aliquam, illo doloribus commodi non blanditiis accusamus
-                                    harum fugit distinctio nulla vero corporis! Sequi facere beatae, nihil
-                                    praesentium, perspiciatis excepturi enim unde sint, debitis omnis ad
-                                    obcaecati sapiente ducimus ullam iste pariatur sit maiores est?</p>
+                                <p class="p-3" style="z-index: 1 !important;" id="contentOfNotePreview"></p>
+                                <textarea class="w-100 m-0 p-3 border-0 bg-primary bg-opacity-10 text-light"
+                                    id="textareaForEditing" style="height: 34vh; outline: 0;"></textarea>
                             </div>
                         </div>
                     </div>
@@ -617,45 +473,80 @@
                             class="navbar flex-column justify-content-start align-items-stretch col-3">
                             <a href="#" class="navbar-brand align-self-start p-0 m-0">Settings</a>
                             <nav class="nav flex-column nav-pills">
-                                <a href="#item-1" class="nav-link px-4">Item 1</a>
-                                <a href="#item-2" class="nav-link px-4">Item 2</a>
-                                <a href="#item-3" class="nav-link px-4">Item 3</a>
+                                <a href="#item-1" class="nav-link px-4">Appearance</a>
+                                <a href="#item-2" class="nav-link px-4">Time</a>
+                                <a href="#item-3" class="nav-link px-4">Date</a>
+                                <a href="#item-4" class="nav-link px-4">Account</a>
                             </nav>
                         </nav>
                         <div class="col-9" data-bs-spy="scroll" data-bs-target="#settingsNavbar"
                             style="height: 70vh; overflow-y:auto; scroll-behavior: smooth;" data-bs-offset="0"
                             tabindex="0">
-                            <h4 id="item-1">Item 1</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, velit? Lorem
-                                ipsum, dolor sit amet consectetur adipisicing elit. Omnis dicta ipsa non ex
-                                voluptatem dolores corporis, vel fugiat inventore! Dolor odio eveniet similique
-                                minima aspernatur, ex animi, molestiae fugit necessitatibus enim alias dolore.
-                                Quaerat tempora, omnis numquam soluta impedit maxime cum sint natus laborum quos
-                                eveniet. Beatae maiores, atque cum reiciendis incidunt laborum quam officia,
-                                blanditiis nostrum distinctio ratione dolorum inventore doloribus commodi, eum
-                                magni. Iure ad et exercitationem qui distinctio deserunt blanditiis dolore
-                                perferendis est fuga dolores fugit quaerat dignissimos, perspiciatis eaque
-                                ducimus impedit tenetur vitae illum officiis tempora esse quo soluta quisquam?
-                                Eveniet ipsam, illo expedita, harum ducimus eum quos veniam obcaecati, quo
-                                officia nesciunt vitae? Maxime, perspiciatis? Facilis, expedita temporibus?
-                                Architecto commodi sapiente molestiae, quaerat nostrum earum aut pariatur. Nobis
-                                officiis porro deleniti quas repellat doloribus saepe. Culpa quaerat quod
-                                provident consequuntur accusamus vero voluptas earum laudantium obcaecati veniam
-                            </p>
-                            <h4 id="item-2">Item 2</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique, ut!</p>
-                            <h4 id="item-3">Item 3</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nemo?</p>
+                            <h2 id="item-1">Appearance</h2>
+
+                            <div class="hr w-75 p-1 bg-primary bg-opacity-25 mx-auto mt-5 mb-1 rounded-pill"></div>
+                            <h2 id="item-2">Time</h2>
+
+                            <div class="hr w-75 p-1 bg-primary bg-opacity-25 mx-auto mt-5 mb-1 rounded-pill"></div>
+                            <h2 id="item-3">Date</h2>
+
+                            <div class="hr w-75 p-1 bg-primary bg-opacity-25 mx-auto mt-5 mb-1 rounded-pill"></div>
+                            <h2 id="item-4">Account</h2>
+                            <form method="dialog" class="row g-2" id="changeNameForm">
+                                <h5>Change firstname or lastname</h5>
+                                <div class="form-floating col-6">
+                                    <input type="text" class="form-control bg-primary bg-opacity-10 text-light"
+                                        id="firstNameOfUser" autocomplete="off" placeholder="First Name"
+                                        onchange="enableSubmit()" required>
+                                    <label for="firstNameOfUser" class="ms-3 ps-0">First Name</label>
+                                </div>
+                                <div class="form-floating col-6">
+                                    <input type="text" class="form-control bg-primary bg-opacity-10 text-light"
+                                        id="lastNameOfUser" autocomplete="off" placeholder="Last Name"
+                                        onchange="enableSubmit()" required>
+                                    <label for="lastNameOfUser" class="ms-3 ps-0">Last Name</label>
+                                </div>
+                                <div class="d-flex">
+                                    <button type="reset"
+                                        class="btn btn-outline-warning w-auto ms-auto me-2">Reset</button>
+                                    <button type="submit" class="btn btn-outline-primary" id="submitChangeNameButton"
+                                        onclick="getChangedNameFromInputs()" disabled>Change</button>
+                                </div>
+                            </form>
+                            <form class="row g-2">
+                                <h5>Change Password</h5>
+                                <div class="form-floating col-6">
+                                    <input type="password" class="form-control bg-primary bg-opacity-10 text-light"
+                                        id="oldPassword" placeholder="Old Passwred">
+                                    <label for="oldPassword" class="ms-4 ps-0">Old Password</label>
+                                </div>
+                                <div class="form-floating col-6">
+                                    <input type="password" class="form-control bg-primary bg-opacity-10 text-light"
+                                        id="newPassword" placeholder="New Passwred">
+                                    <label for="newPassword" class="ms-4 ps-0">New Password</label>
+                                </div>
+                                <div class="form-floating col-6">
+                                    <input type="password" class="form-control bg-primary bg-opacity-10 text-light"
+                                        id="repNewPassword" placeholder="Confirm New Passwred">
+                                    <label for="repNewPassword" class="ms-4 ps-0">Confirm new Password</label>
+                                </div>
+                                <div class="d-flex">
+                                    <button type="reset"
+                                        class="btn btn-outline-warning w-auto ms-auto me-2">Reset</button>
+                                    <button type="button" class="btn btn-outline-primary">Change</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="vr p-1 my-auto mx-3 bg-primary" style="height: 85vh;"></div>
+        <div class="vr p-1 my-auto mx-3 bg-primary d-non" style="height: 85vh;"></div>
 
     </div>
     <script src="./javascript.js"></script>
+    <script src="./note.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
