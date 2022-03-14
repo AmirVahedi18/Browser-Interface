@@ -112,8 +112,10 @@ function switchToPreview() {
 function clearPreview() {
   document.getElementById("contentOfNotePreview").innerHTML = null;
   document.getElementById("titleOfNotePreview").innerHTML = null;
+  document.getElementById("iconsForEditing").innerHTML = null;
   refreshRecentNote();
   document.getElementById("notePreviewTitle").innerHTML = "Preview";
+  
 }
 
 // Function to change the display of icons
@@ -169,14 +171,6 @@ function saveNewChanges(index) {
   document.getElementById("notePreviewTitle").innerHTML = "Preview";
 }
 
-// Function to download json file of notes
-function downloadUserJSON(content, fileName, contentType) {
-  let link = document.getElementById("downloadNoteJSON");
-  let file = new Blob([content], { type: contentType });
-  link.href = URL.createObjectURL(file);
-  link.download = fileName;
-}
-
 // Function to reorder recent notes
 function reorderRecentNotes(event, index) {
   if (index == 0) {
@@ -187,6 +181,7 @@ function reorderRecentNotes(event, index) {
     ? shiftNthItemToTheMthPlace(index, 0, listOfRecentNote)
     : shiftNthItemToTheMthPlace(index, index - 1, listOfRecentNote);
   refreshRecentNote();
+  createNotePreview(index);
 }
 
 // Function to reorder list

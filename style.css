@@ -76,6 +76,7 @@ body {
   z-index: 11;
   margin: 0;
   box-shadow: 0 0 35px 5px rgba(46, 46, 46, 0.3);
+  transition: all 0s;
 }
 
 #secondScarf {
@@ -203,7 +204,8 @@ body {
 }
 /************/
 
-a.editNoteIcon {
+a.editNoteIcon,
+a.saveNoteIcon {
   transition: all 0.2s ease-in-out;
 }
 
@@ -213,10 +215,6 @@ a.removeNoteIcon {
 
 a.closeNoteIcon {
   transition: all 0.4s ease-in-out;
-}
-
-a.saveNoteIcon {
-  transition: all 0.2s ease-in-out;
 }
 
 a.editNoteIcon,
@@ -251,5 +249,3 @@ li.noteItemInList:hover a.removeNoteIcon {
 #notePreview:hover a.closeNoteIcon {
   left: 0;
 }
-
-

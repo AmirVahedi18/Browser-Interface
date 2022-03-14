@@ -369,9 +369,9 @@ function updateResolution() {
   setResolution();
 }
 
-// Function to save JSON file of user config
-function downloadUserJSON(content, fileName, contentType) {
-  let link = document.getElementById("downloadUserJSON");
+// Function to download JSON file of user configs
+function downloadJSON(content, fileName, contentType, id) {
+  let link = document.getElementById(id);
   let file = new Blob([content], { type: contentType });
   link.href = URL.createObjectURL(file);
   link.download = fileName;

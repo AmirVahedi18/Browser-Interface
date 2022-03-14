@@ -48,9 +48,11 @@
                     </h6>
                 </div>
                 <a id="downloadUserJSON" class="btn btn-sm btn-outline-primary rounded-pill mt-2"
-                    onclick='downloadUserJSON(JSON.stringify(user), "user.json", "text/plain")'>Download User JSON</a>
+                    onclick='downloadJSON(JSON.stringify(user), "user.json", "text/plain", "downloadUserJSON")'>Download
+                    User JSON</a>
                 <a id="downloadNoteJSON" class="btn btn-sm btn-outline-primary rounded-pill mt-2"
-                    onclick='downloadUserJSON(JSON.stringify(notes), "notes.json", "text/plain")'>Download Note JSON</a>
+                    onclick='downloadJSON(JSON.stringify(notes), "notes.json", "text/plain", "downloadNoteJSON")'>Download
+                    Note JSON</a>
             </div>
 
             <div class="position-relative rounded-circle" id="clock">
@@ -425,14 +427,15 @@
                             <span class="input-group-text bg-primary bg-opacity-25 text-light"
                                 id="titleOfNote">Title</span>
                             <input type="text" class="form-control bg-primary bg-opacity-25 text-light"
-                                aria-label="Title of Note" id="titleOfNewNote" aria-describedby="titleOfNote" required>
+                                aria-label="Title of Note" id="titleOfNewNote" aria-describedby="titleOfNote" required
+                                autocomplete="off">
                         </div>
                         <div class="input-group">
                             <span class="input-group-text bg-primary bg-opacity-25 text-light"
                                 id="bodyOfNote">Note</span>
                             <textarea class="form-control bg-primary bg-opacity-25 text-light h-100"
                                 id="contentOfNewNote" rows="5" aria-label="Body of Note" aria-describedby="bodyOfNote"
-                                required></textarea>
+                                required autocomplete="off"></textarea>
                         </div>
                         <div class="d-flex justify-content-center mt-2">
                             <button type="reset" class="btn btn-outline-warning mx-1">Reset</button>
