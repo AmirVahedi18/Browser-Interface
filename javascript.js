@@ -31,6 +31,8 @@ var user = {
 };
 
 var notes;
+var noteItems;
+var linksAndFolders;
 
 var currentDate = new Date();
 var hours = currentDate.getHours();
@@ -79,7 +81,10 @@ inisialation();
 async function inisialation() {
   await getUserInfoFromJSON();
   await getNotesFromJSON();
+  await getLinksFromJSON();
+  noteItems = notes["notes"];
   initialaizeRecentNotes();
+  initialaizeFoldersLink();
   shiftNthItemToTheMthPlace();
   setValueToChangeFormInputs();
   sayHiToUser();
@@ -118,6 +123,12 @@ async function getNotesFromJSON() {
   await fetch("notes.json")
     .then((response) => response.json())
     .then((json) => (notes = json));
+}
+
+async function getLinksFromJSON() {
+  await fetch("links.json")
+    .then((response) => response.json())
+    .then((json) => (linksAndFolders = json));
 }
 
 // function to say hi to the user
@@ -398,10 +409,9 @@ function getChangedNameFromInputs() {
   user.firstName = inputs[0].value;
   user.lastName = inputs[1].value;
   sayHiToUser();
-  downloadUserJSON(JSON.stringify(user), "user.json", "text/plain");
+  downloadJSON(JSON.stringify(user), "user.json", "text/plain", "downloadUserJSON");
   let submitChangeNameButton = document.getElementById(
     "submitChangeNameButton"
   );
   submitChangeNameButton.disabled = true;
 }
-

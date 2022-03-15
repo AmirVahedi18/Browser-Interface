@@ -1,0 +1,73 @@
+.editIcon,
+.saveIcon {
+  transition: all 0.2s ease-in-out;
+}
+
+.removeIcon {
+  transition: all 0.3s ease-in-out;
+}
+
+.closeIcon {
+  transition: all 0.4s ease-in-out;
+}
+
+.editIcon,
+.removeIcon,
+.saveIcon,
+.closeIcon {
+  position: relative;
+  left: 110px;
+  z-index: 100;
+}
+
+.pointerIcon {
+  cursor: pointer;
+}
+
+li.noteItemInList:hover .editIcon {
+  left: 0;
+}
+
+li.noteItemInList:hover .removeIcon {
+  left: 0;
+}
+
+#notePreview:hover .editIcon {
+  left: 0;
+}
+
+#notePreview:hover .removeIcon {
+  left: 0;
+}
+
+#notePreview:hover .saveIcon {
+  left: 0;
+}
+
+#notePreview:hover .closeIcon {
+  left: 0;
+}
+
+#linkPreview:hover .editIcon {
+  left: 0;
+}
+
+#linkPreview:hover .removeIcon {
+  left: 0;
+}
+
+#linkPreview:hover .saveIcon {
+  left: 0;
+}
+
+#linkPreview:hover .closeIcon {
+  left: 0;
+}
+
+.listItemHover {
+  transition: all 0.5s;
+}
+
+li.listItemHover:hover {
+  background-color: rgba(0, 10, 200, 0.25) !important;
+}
