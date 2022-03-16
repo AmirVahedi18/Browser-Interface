@@ -114,19 +114,19 @@ function onResizeFunctions() {
 
 // function to get info from JSON file
 async function getUserInfoFromJSON() {
-  await fetch("user.json")
+  await fetch("./json/user.json")
     .then((response) => response.json())
     .then((json) => (user = json));
 }
 
 async function getNotesFromJSON() {
-  await fetch("notes.json")
+  await fetch("./json/notes.json")
     .then((response) => response.json())
     .then((json) => (notes = json));
 }
 
 async function getLinksFromJSON() {
-  await fetch("links.json")
+  await fetch("./json/links.json")
     .then((response) => response.json())
     .then((json) => (linksAndFolders = json));
 }
@@ -170,11 +170,17 @@ function setDate() {
 
 // Function to position the numbers around the clock
 function setTransitionToOClocks() {
-  for (var i = 0; i < 12; i++) {
-    document.getElementById("oClock-" + i).style.transform =
+  let containerOfOClocks = document.getElementById("oClocks");
+  for (var i = 1; i <= 12; i++) {
+    let containerOfOClock = document.createElement("div");
+    containerOfOClock.classList.add("oClock");
+    let contentOfOClock = document.createElement("h1");
+    contentOfOClock.innerHTML = i;
+    containerOfOClock.appendChild(contentOfOClock);
+    containerOfOClock.style.transform =
       "translate(175px, 0) rotateZ(" + i * 30 + "deg)";
-    document.getElementById("oClock-" + i).children[0].style.transform =
-      "rotateZ(-" + i * 30 + "deg)";
+    contentOfOClock.style.transform = "rotateZ(-" + i * 30 + "deg)";
+    containerOfOClocks.appendChild(containerOfOClock);
   }
 }
 
@@ -410,7 +416,12 @@ function getChangedNameFromInputs() {
   user.firstName = inputs[0].value;
   user.lastName = inputs[1].value;
   sayHiToUser();
-  downloadJSON(JSON.stringify(user), "user.json", "text/plain", "downloadUserJSON");
+  downloadJSON(
+    JSON.stringify(user),
+    "user.json",
+    "text/plain",
+    "downloadUserJSON"
+  );
   let submitChangeNameButton = document.getElementById(
     "submitChangeNameButton"
   );

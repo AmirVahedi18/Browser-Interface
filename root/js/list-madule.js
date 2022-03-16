@@ -195,6 +195,6 @@ function reorder(event, index, noteOrLink) {
 function clearInputsAfterGettingInformation(...idOfInputs) {
   for (let eachInput of idOfInputs) {
     console.log(document.getElementById(eachInput));
-    document.getElementById(eachInput).value = null;
+    document.getElementById(eachInput).value = " ";
   }
 }

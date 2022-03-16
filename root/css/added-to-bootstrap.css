@@ -1,0 +1,15 @@
+.p-05 {
+    padding: 0.12rem !important;
+}
+
+.rounded-4 {
+  border-radius: 0.5rem !important;
+}
+
+.border-warning-opacity-50 {
+  border-color: rgba(255, 193, 7, 0.5) !important;
+}
+
+.border-primary-opacity-50 {
+  border-color: rgba(13, 110, 253, 0.5) !important;
+}

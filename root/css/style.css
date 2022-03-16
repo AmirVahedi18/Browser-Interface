@@ -26,7 +26,7 @@
 }
 
 .box {
-  border-radius: 8px;
+  border-radius: 0.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: rgba(0, 0, 121, 0.2);
@@ -43,16 +43,10 @@
 
 * {
   font-family: "Source Sans Pro", sans-serif;
-  /*transition: all 0.25s;*/
 }
 
 body {
-  background-color: rgb(0, 0, 37) !important;
-}
-
-.vr {
-  padding: 2px !important;
-  border-radius: 100px;
+  background-color: rgb(0, 0, 40) !important;
 }
 
 #column-1,
@@ -203,8 +197,6 @@ body {
   width: var(--width-of-day-progress);
 }
 
-/*******/
-
 .inputStyle {
   border: 1px solid rgba(0, 0, 172, 0.5) !important;
   background-color: rgba(0, 0, 121, 0.2) !important;
@@ -223,18 +215,6 @@ body {
   color: white !important;
 }
 
-.rounded-4 {
-  border-radius: 8px !important;
-}
-
-.buttonStyleReset {
-  border-color: rgba(255, 193, 7, 0.5) !important;
-}
-
-.buttonStyleAdd {
-  border-color: rgba(13, 110, 253, 0.5) !important;
-}
-
 .floatingInputStyle {
   border: 1px solid rgba(0, 0, 172, 0.5) !important;
   background-color: rgba(0, 0, 121, 0.3) !important;
@@ -251,7 +231,6 @@ body {
 
 .checkBoxInputForLinkDeletion:checked {
   background-color: blue !important;
-
   box-shadow: none !important;
 }
 
