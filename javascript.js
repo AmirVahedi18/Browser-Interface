@@ -386,6 +386,7 @@ function downloadJSON(content, fileName, contentType, id) {
   let file = new Blob([content], { type: contentType });
   link.href = URL.createObjectURL(file);
   link.download = fileName;
+  console.log(content);
 }
 
 function setValueToChangeFormInputs() {

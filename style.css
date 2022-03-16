@@ -240,3 +240,21 @@ body {
   background-color: rgba(0, 0, 121, 0.3) !important;
   color: white !important;
 }
+
+.checkBoxInputForLinkDeletion {
+  top: 0 !important;
+  left: 100 !important;
+  background-color: lightblue !important;
+  transform: translate(-100%, -50%);
+  cursor: pointer;
+}
+
+.checkBoxInputForLinkDeletion:checked {
+  background-color: blue !important;
+
+  box-shadow: none !important;
+}
+
+.checkBoxInputForLinkDeletion:active {
+  box-shadow: none !important;
+}

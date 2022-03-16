@@ -35,7 +35,8 @@ function createLinkPreview(index) {
     "iconsOfLinkPreview"
   ).innerHTML = `<i class="fa fa-plus text-info px-1 editIcon pointerIcon" onclick="addLinkToFolder(${index})" ></i>
   <i class="fa fa-save text-info px-1 pe-2 saveIcon pointerIcon d-none" onclick="saveNewChanges(${index})"></i>
-  <i class="fa fa-trash-alt text-warning px-1 removeIcon pointerIcon" onclick="removeLinkFolder(${index})"></i>
+  <i class="fa fa-trash-alt text-warning px-1 removeIcon pointerIcon d-block" id="selectLinksForDeletionIcon" onclick="selectLinksForDeletion(${index})"></i>
+  <i class="fa fa-trash-alt text-danger px-1 removeIcon pointerIcon d-none" id="deleteSelectedLinksIcon" onclick="deleteSelectedLinks(${index})"></i>
   <i class="fa fa-times-circle text-danger px-1 closeIcon pointerIcon" onclick="clearPreviewLinkFolder(${index})"></i>`;
   for (let i = 0; i < numberOfLinksOfSelectedFolder; i++) {
     let linkURL = linksOfSelectedFolder[i]["linkURL"];
@@ -161,6 +162,7 @@ function addLinkToFolder(index) {
   }, 1000);
   titleOfAdd.innerHTML = `Add to ${selectedFolderTitle}`;
   addLinkToWhichFolder = index;
+  createLinkPreview(index);
 }
 
 function getDataFromInputsAndAddNewLink() {
@@ -192,4 +194,63 @@ function getDataFromInputsAndAddNewLink() {
     );
     createLinkPreview(addLinkToWhichFolder);
   }
+}
+
+function selectLinksForDeletion(index) {
+  let previewOfFolder = document.getElementById("previewOfFolder");
+  let divContainerOfLink = previewOfFolder.querySelector("div");
+  let collectionOfLinks = divContainerOfLink.children;
+  for (let eachLink of collectionOfLinks) {
+    let linkOfEachLink = eachLink.querySelector("a");
+    linkOfEachLink.removeAttribute("href");
+    eachLink.classList.add("position-relative");
+    let checkBoxInput = document.createElement("input");
+    checkBoxInput.type = "checkbox";
+    checkBoxInput.classList.add(
+      "position-absolute",
+      "start-100",
+      "top-0",
+      "form-check-input",
+      "rounded-pill",
+      "checkBoxInputForLinkDeletion"
+    );
+    eachLink.prepend(checkBoxInput);
+  }
+  document
+    .getElementById("selectLinksForDeletionIcon")
+    .classList.replace("d-block", "d-none");
+
+  document
+    .getElementById("deleteSelectedLinksIcon")
+    .classList.replace("d-none", "d-block");
+}
+
+function deleteSelectedLinks(index) {
+  let previewOfFolder = document.getElementById("previewOfFolder");
+  let divContainerOfLink = previewOfFolder.querySelector("div");
+  let collectionOfLinks = divContainerOfLink.children;
+  let numberOfCollectionOfLinks = collectionOfLinks.length;
+  let selectedFolder = linksAndFolders["folders"][index];
+  let linksOfSelectedFolder = selectedFolder["links"];
+  for (let i = 0; i < numberOfCollectionOfLinks; i++) {
+    let checkBoxInputOfEachLink = collectionOfLinks[i].querySelector("input");
+    let isCheckBoxChecked = checkBoxInputOfEachLink.checked;
+    if (isCheckBoxChecked) {
+      linksOfSelectedFolder = linksOfSelectedFolder.filter(function (
+        value,
+        index
+      ) {
+        return index != i;
+      });
+    }
+  }
+  linksAndFolders["folders"][index]["links"] = linksOfSelectedFolder;
+  document
+    .getElementById("selectLinksForDeletionIcon")
+    .classList.replace("d-block", "d-none");
+
+  document
+    .getElementById("deleteSelectedLinksIcon")
+    .classList.replace("d-none", "d-block");
+  createLinkPreview(index);
 }
