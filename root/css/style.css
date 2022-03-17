@@ -237,3 +237,7 @@ body {
 .checkBoxInputForLinkDeletion:active {
   box-shadow: none !important;
 }
+
+.mousePointer {
+  cursor: pointer;
+}

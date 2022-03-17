@@ -20,6 +20,11 @@ async function initialaizeRecentNotes() {
       "fa-trash-alt text-warning removeIcon removeNoteIconForListItem"
     );
     recentNoteList.appendChild(newElement);
+    let clonedNewElement = newElement.cloneNode(true);
+    clonedNewElement.querySelector("div.flex-column div.d-flex").remove();
+    clonedNewElement.querySelector("a").removeAttribute("ondblclick");
+    clonedNewElement.setAttribute("onclick", "clickATab('notes')");
+    recentNotesListForHomeTab.appendChild(clonedNewElement);
   }
 }
 

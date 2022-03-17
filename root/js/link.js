@@ -3,7 +3,6 @@ async function initialaizeFoldersLink() {
   let lengthOfFolders = linksAndFolders["folders"].length;
   for (let i = 0; i < lengthOfFolders; i++) {
     let folder = linksAndFolders["folders"][i];
-
     let newElement = createListItem(
       "link",
       folder,
@@ -55,6 +54,8 @@ function createLinkPreview(index) {
   }
   previewOfFolder.innerHTML = null;
   previewOfFolder.appendChild(containerOfLinks);
+  index == 0 ? createLinkPreviewForHomeTab() : null;
+
 }
 
 function removeLinkFolder(nthItem) {
@@ -69,6 +70,7 @@ function removeLinkFolder(nthItem) {
 
 function refreshFolderList() {
   document.getElementById("listOfFoldersOfLinks").innerHTML = null;
+  createLinkPreviewForHomeTab();
   initialaizeFoldersLink();
 }
 

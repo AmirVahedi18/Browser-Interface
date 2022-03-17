@@ -42,6 +42,9 @@ function createMonthElement(jsonElement) {
   }
   for (let i = 0; i < numberOfDays; i++) {
     let daysOfThisMonth = document.createElement("span");
+    if (currntMuonth == indexOfMonth && currentDateInMonth == i + 1) {
+      daysOfThisMonth.classList.add("bg-primary");
+    }
     daysOfThisMonth.innerHTML = i + 1;
     containerOfDayItems.appendChild(daysOfThisMonth);
     numberOfRemainedItems--;
