@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/list-madule.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/added-to-bootstrap.css">
+    <link rel="stylesheet" href="./css/calendar.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +22,7 @@
 
 <body class="text-light">
     <div class="row p-0 m-0">
-        <div class="d-flex flex-column align-items-center col-auto d-none" id="column-1">
+        <div class="d-flex flex-column align-items-center col-auto d-non" id="column-1">
             <div class="mx-auto mb-auto">
                 <h1 class="display-3 fw-lighter m-0" id="sayHiToUser">Hi Dear!</h1>
                 <h1 class="display-6 fw-lighter text-nowrap m-0" id="goodTime">Welcome Back, </h1>
@@ -95,9 +96,9 @@
             </div>
         </div>
 
-        <div class="vr p-1 my-auto mx-3 bg-primary rounded-pill d-none" style="height: 85vh;"></div>
+        <div class="vr p-1 my-auto mx-3 bg-primary rounded-pill d-non" style="height: 85vh;"></div>
 
-        <div class="col-12" id="column-2">
+        <div class="col-6" id="column-2">
             <h3 class="display-4 text-center fw-lighter">Dashboard</h3>
             <ul class="nav nav-pills justify-content-center mb-4" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -112,7 +113,7 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link rounded-4" id="linkes-tab" data-bs-toggle="tab" data-bs-target="#linkes"
                         type="button" role="tab" aria-controls="linkes" aria-selected="false">
-                        Linkes
+                        Links
                     </button>
                 </li>
 
@@ -128,6 +129,15 @@
                 <div class="vr my-2 mx-2 p-05 bg-primary rounded-pill"></div>
 
                 <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-4" id="calendar-tab" data-bs-toggle="tab" data-bs-target="#calendar"
+                        type="button" role="tab" aria-controls="calendar" aria-selected="false">
+                        Calendar
+                    </button>
+                </li>
+
+                <div class="vr my-2 mx-2 p-05 bg-primary rounded-pill"></div>
+
+                <li class="nav-item" role="presentation">
                     <button class="nav-link rounded-4" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings"
                         type="button" role="tab" aria-controls="settings" aria-selected="false">
                         Settings
@@ -136,6 +146,10 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                </div>
+
+                <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+                    <div class="row row-cols-3 g-4" id="containerOfCalendar"></div>
                 </div>
 
                 <div class="tab-pane fade" id="linkes" role="tabpanel" aria-labelledby="linkes-tab">
@@ -380,11 +394,12 @@
             </div>
         </div>
 
-        <div class="vr p-1 my-auto mx-3 bg-primary rounded-pill d-none" style="height: 85vh;"></div>
+        <div class="vr p-1 my-auto mx-3 bg-primary rounded-pill d-non" style="height: 85vh;"></div>
     </div>
 
     <script src="./js/javascript.js"></script>
     <script src="./js/list-madule.js"></script>
+    <script src="./js/calendar-madule.js"></script>
     <script src="./js/note.js"></script>
     <script src="./js/link.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>

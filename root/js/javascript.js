@@ -10,6 +10,8 @@ const days = [
   "Saturday",
 ];
 
+const daysAbbr = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
 const months = [
   "January",
   "February",
@@ -33,6 +35,7 @@ var user = {
 var notes;
 var noteItems;
 var linksAndFolders;
+var calendar;
 
 var currentDate = new Date();
 var hours = currentDate.getHours();
@@ -82,9 +85,11 @@ async function inisialation() {
   await getUserInfoFromJSON();
   await getNotesFromJSON();
   await getLinksFromJSON();
+  await getCalendarFromJSON();
   noteItems = notes["notes"];
   initialaizeRecentNotes();
   initialaizeFoldersLink();
+  createCalendar();
   shiftNthItemToTheMthPlace();
   setValueToChangeFormInputs();
   sayHiToUser();
@@ -129,6 +134,12 @@ async function getLinksFromJSON() {
   await fetch("./json/links.json")
     .then((response) => response.json())
     .then((json) => (linksAndFolders = json));
+}
+
+async function getCalendarFromJSON() {
+  await fetch("./json/calendar.json")
+    .then((response) => response.json())
+    .then((json) => (calendar = json));
 }
 
 // function to say hi to the user

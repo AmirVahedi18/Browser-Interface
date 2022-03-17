@@ -1,0 +1,28 @@
+#containerOfCalendar {
+    height: 80vh;
+    overflow-y: auto;
+    margin-top: 1.5rem;
+}
+
+#containerOfCalendar div .row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+#containerOfCalendar div .row span {
+  padding: 0;
+  width: auto;
+  text-align: center;
+  background-color: rgb(9, 25, 117);
+  border-radius: 0.4rem;
+}
+
+#containerOfCalendar div .row span.weekDays {
+  background-color: rgb(19, 43, 182);
+}
+
+#containerOfCalendar div .row span.text-muted {
+  background-color: rgb(12, 22, 78);
+}
