@@ -3,8 +3,8 @@
   --width-of-day-progress: 370px;
   --progress: 0;
   --width-and-height-of-clock: 350px;
-  --width-of-screen: 0;
-  --height-of-screen: 0;
+  --width-of-window: 0;
+  --height-of-window: 0;
 }
 
 ::-webkit-scrollbar {
@@ -51,7 +51,7 @@ body {
 
 #column-1,
 #column-2 {
-  height: calc(var(--height-of-screen));
+  height: calc(var(--height-of-window));
 }
 
 /* Clock */
